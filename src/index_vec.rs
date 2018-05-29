@@ -32,33 +32,3 @@ macro_rules! newtype_index {
 
     );
 }
-
-/// A Vec or slice that uses newtype indices.
-///
-/// `V` is only ever `[T]` or `Vec<T>`.
-#[derive(Clone, PartialEq, Eq, Hash)]
-pub struct Indexed<I: Idx, V: ?Sized> {
-    _marker: PhantomData<fn(&I)>,
-    pub raw: V,
-}
-
-pub type IndexVec<I, T> = Indexed<I, Vec<T>>;
-
-// Whether `Indexed` is `Send` depends only on the data,
-// not the phantom data.
-unsafe impl<I: Idx, V> Send for Indexed<I, V> where V: Send {}
-
-
-//--------------------------------------------------------
-
-impl<I: Idx, V: Deref<Target=[T]>, T> Deref for Indexed<I, V> {
-    type Target = Indexed<I, [T]>;
-
-    #[inline]
-    fn deref(&self) -> &Self::Target { loop {}    }
-}
-
-impl<I: Idx, V: DerefMut<Target=[T]>, T> DerefMut for Indexed<I, V> {
-    #[inline]
-    fn deref_mut(&mut self) -> &mut Self::Target { loop {}    }
-}
