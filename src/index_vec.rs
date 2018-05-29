@@ -17,7 +17,7 @@ use std::ops::{Deref, DerefMut};
 use std::fmt::{self, Debug};
 use std::hash::Hash;
 
-pub unsafe trait Idx: Copy + 'static + Eq + Debug + Ord + Hash + Send + Sync {
+pub unsafe trait Idx {
 }
 
 unsafe impl Idx for usize {
