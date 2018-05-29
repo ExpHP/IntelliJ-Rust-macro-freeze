@@ -1,0 +1,13 @@
+**/target
+**/*.rs.bk
+**/.vscode
+**/.idea
+**/Cargo.lock
+**/cmake-build-debug
+**/__pycache__
+perf.data*
+
+.subcrate-cfg
+.secret-test-dir
+
+crates.d/config.toml
